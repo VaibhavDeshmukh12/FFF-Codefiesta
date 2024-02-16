@@ -3,12 +3,15 @@ import { useState, useEffect } from 'react';
 
 function CountdownTimer({ onSubmit }) {
     const [isActive, setIsActive] = useState(false);
+
+    // adding current timer to local storage
     const [seconds, setSeconds] = useState(
         parseInt(localStorage.getItem('timer') || 300)
     );
 
     useEffect(() => setIsActive(true), []);
 
+    // Countdown logic
     useEffect(() => {
         let interval = null;
         if (isActive && seconds > 0) {
@@ -21,7 +24,6 @@ function CountdownTimer({ onSubmit }) {
         } else if (!isActive && seconds !== 0) {
             clearInterval(interval);
         }
-
         if (seconds === 0) {
             onSubmit();
             setIsActive(false);
@@ -32,6 +34,7 @@ function CountdownTimer({ onSubmit }) {
         return () => clearInterval(interval);
     }, [isActive, seconds, onSubmit, setIsActive]);
 
+    // formatting time in min and sec.
     const formatTime = (time) => {
         const minutes = Math.floor(time / 60);
         const remainingSeconds = time % 60;

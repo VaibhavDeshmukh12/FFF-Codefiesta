@@ -1,14 +1,21 @@
-
 import './home.css'
-import CountdownTimer from './Timer';
+import CountdownTimer from './CountdownTimer';
+import toast from 'react-hot-toast';
 
 const Home = () => {
+
+    const handleSubmit = async() => {
+        // console.log('Form submitted!');
+        toast.success("Form submitted successfully");
+      };
+
     return (
         <div>
             <div>
                 <div id="container" className="container">
+                    {/* timer */}
                     <div id="timer">
-                        <CountdownTimer />
+                        <CountdownTimer onSubmit={handleSubmit} />
                     </div>
                     <ul id="code">
                         {/* Jumbled HTML Code Here */}
